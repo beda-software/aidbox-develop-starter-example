@@ -1,4 +1,12 @@
 {:ns system
  :import #{aidbox}
+
  box
- {:zen/tags #{aidbox/system}}}
+ {:zen/tags #{aidbox/system}
+  :zen/desc "Import box for test"
+  :services {:seed seed}}
+
+ seed
+ {:zen/tags  #{aidbox/service}
+  :engine    aidbox/seed
+  :resources [{:id "SPA" :secret "secret" :grant_types ["password"] :resourceType "Client"}]}}
