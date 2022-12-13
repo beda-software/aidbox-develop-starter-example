@@ -34,5 +34,5 @@ PGDATABASE=aidbox
 AIDBOX_COMPLIANCE=enabled
 
 # Aidbox configuraiton project path and entrypoint
-BOX_PROJECT_GIT_URL=project/
 AIDBOX_ZEN_ENTRYPOINT=system/box
+BOX_PROJECT_GIT_TARGET__PATH=/project
