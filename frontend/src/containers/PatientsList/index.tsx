@@ -7,14 +7,10 @@ export function PatientsList() {
   const { patientsRD } = usePatientsList();
 
   return (
-    <>
-      <RenderRemoteData remoteData={patientsRD}>
-        {(data) => (
-          <PatientsListTable
-            patientList={extractBundleResources(data).Patient}
-          />
-        )}
-      </RenderRemoteData>
-    </>
+    <RenderRemoteData remoteData={patientsRD}>
+      {(data) => (
+        <PatientsListTable patientList={extractBundleResources(data).Patient} />
+      )}
+    </RenderRemoteData>
   );
 }
