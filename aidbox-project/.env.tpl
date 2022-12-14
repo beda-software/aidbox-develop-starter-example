@@ -21,7 +21,7 @@ AIDBOX_ADMIN_ID=admin
 AIDBOX_ADMIN_PASSWORD=secret
 
 # port to run webserver at
-AIDBOX_PORT=8888
+AIDBOX_PORT=8080
 AIDBOX_FHIR_VERSION=4.0.1
 
 # db connection params
