@@ -6,9 +6,9 @@ export function Main() {
   const { onLogout } = useMain();
 
   return (
-    <div>
+    <>
       <AppHeader onLogout={onLogout} />
       <PatientsList />
-    </div>
+    </>
   );
 }
