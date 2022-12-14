@@ -9,4 +9,5 @@
  seed
  {:zen/tags  #{aidbox/service}
   :engine    aidbox/seed
-  :resources [{:id "SPA" :secret "secret" :grant_types ["password"] :resourceType "Client"}]}}
+  :resources [{:id "SPA" :secret "secret" :grant_types ["password"] :resourceType "Client"},
+              {:id "patient_example", :name [{:family "John"}] :resourceType "Patient"}]}}
