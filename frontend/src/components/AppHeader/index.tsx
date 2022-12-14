@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, Space } from "antd";
 
 interface AppHeaderProps {
   onLogout: () => void;
@@ -6,14 +6,13 @@ interface AppHeaderProps {
 
 export function AppHeader({ onLogout }: AppHeaderProps) {
   return (
-    <>
-      <h1>Hemolyzer</h1>
+    <Space size="middle" style={{ margin: 10 }}>
       <Button key="create-patient" onClick={console.log} type={"primary"}>
         Create patient
       </Button>
       <Button key="logout" onClick={onLogout}>
         Logout
       </Button>
-    </>
+    </Space>
   );
 }
