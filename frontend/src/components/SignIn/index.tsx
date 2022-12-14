@@ -14,6 +14,7 @@ export function SignIn() {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
+      style={{ padding: 10 }}
     >
       <Text>Username</Text>
       <Form.Item
