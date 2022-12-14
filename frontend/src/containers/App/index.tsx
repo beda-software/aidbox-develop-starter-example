@@ -4,18 +4,14 @@ import { Main } from "../Main";
 import { SignIn } from "../../components/SignIn";
 import { useApp } from "./hooks";
 
-function App() {
+export function App() {
   const { userResponse } = useApp();
 
   return (
     <BrowserRouter>
       <RenderRemoteData
         remoteData={userResponse}
-        renderFailure={(error) => (
-          <div style={{ width: "100%", padding: "2.5%" }}>
-            {JSON.stringify(error)}
-          </div>
-        )}
+        renderFailure={(error) => <div>{JSON.stringify(error)}</div>}
       >
         {(user) => (
           <Routes>
@@ -36,5 +32,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;

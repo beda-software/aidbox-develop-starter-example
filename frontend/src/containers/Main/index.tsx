@@ -1,31 +1,14 @@
-import { RenderRemoteData } from "aidbox-react/lib/components/RenderRemoteData";
-import { useService } from "aidbox-react/lib/hooks/service";
-import {
-  extractBundleResources,
-  getFHIRResources,
-} from "aidbox-react/lib/services/fhir";
-import { Button } from "antd";
-import { logout } from "../../services/auth";
+import { AppHeader } from "../../components/AppHeader";
+import { PatientsList } from "../PatientsList";
+import { useMain } from "./hooks";
 
-export const Main = () => {
-  const [patientRD] = useService(async () => {
-    const response = await getFHIRResources("Patient", {});
-    return response;
-  });
-
-  const onLogout = () => {
-    logout();
-    window.location.reload();
-  };
+export function Main() {
+  const { onLogout } = useMain();
 
   return (
     <div>
-      <RenderRemoteData remoteData={patientRD}>
-        {(data) => <div>{JSON.stringify(extractBundleResources(data))}</div>}
-      </RenderRemoteData>
-      <Button key="logout" onClick={onLogout}>
-        logout
-      </Button>
+      <AppHeader onLogout={onLogout} />
+      <PatientsList />
     </div>
   );
-};
+}
