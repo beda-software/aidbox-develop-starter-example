@@ -1,4 +1,5 @@
-import { Table } from "antd";
+import { Table, Typography } from "antd";
+import { useNavigate } from "react-router-dom";
 import { Patient } from "../../types/aidbox";
 
 interface Props {
@@ -6,17 +7,22 @@ interface Props {
 }
 
 export function PatientsListTable({ patientList }: Props) {
-  const goToPatientData = (patient: Patient) => {};
+  const navigate = useNavigate();
+
+  const goToPatientData = (patient: Patient) =>
+    navigate(`/patients/${patient.id}`);
+
+  const { Text, Link } = Typography;
 
   const dataSource = patientList.map((patient: Patient) => {
     return {
       key: patient.id,
       patient: (
-        <div onClick={() => goToPatientData(patient)}>
+        <Link onClick={() => goToPatientData(patient)}>
           {patient.name ? String(patient.name[0].family) : patient.id}
-        </div>
+        </Link>
       ),
-      lastUpdated: <div>{patient.meta?.lastUpdated}</div>,
+      lastUpdated: <Text>{patient.meta?.lastUpdated}</Text>,
     };
   });
 

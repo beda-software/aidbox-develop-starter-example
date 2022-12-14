@@ -1,9 +1,11 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Typography } from "antd";
 
 import { useSignIn } from "./useSignIn";
 
 export function SignIn() {
   const { onFinish, onFinishFailed } = useSignIn();
+
+  const { Text } = Typography;
 
   return (
     <Form
@@ -13,15 +15,14 @@ export function SignIn() {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-      <div>Please log in</div>
-      <div>Username</div>
+      <Text>Username</Text>
       <Form.Item
         name="email"
         rules={[{ required: true, message: "Please input your username!" }]}
       >
         <Input placeholder="username" />
       </Form.Item>
-      <div>Password</div>
+      <Text>Password</Text>
       <Form.Item
         name="password"
         rules={[{ required: true, message: "Please input your password!" }]}
