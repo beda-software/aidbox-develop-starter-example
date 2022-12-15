@@ -4,6 +4,7 @@ import { Main } from "../Main";
 import { SignIn } from "../../components/SignIn";
 import { useApp } from "./hooks";
 import { ObservationsList } from "../ObservationsList";
+import { Spin } from "antd";
 
 export function App() {
   const { userResponse } = useApp();
@@ -13,6 +14,7 @@ export function App() {
       <RenderRemoteData
         remoteData={userResponse}
         renderFailure={(error) => <div>{JSON.stringify(error)}</div>} // TODO Show error message
+        renderLoading={() => <Spin />}
       >
         {(user) => (
           <Routes>
