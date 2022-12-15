@@ -10,7 +10,7 @@ import {
 
 const sessionId = getSessionid();
 
-export const useSignIn = () => {
+export function useSignIn() {
   const onFinish = async (values: SigninBody) => {
     const signinResponse = await signin(values);
     if (isSuccess(signinResponse)) {

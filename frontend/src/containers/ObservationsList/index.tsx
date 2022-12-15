@@ -17,9 +17,12 @@ import {
   Modal,
   Space,
   Spin,
+  Table,
+  Typography,
 } from "antd";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { AppHeader } from "../../components/AppHeader";
 import { Observation, Patient } from "../../types/aidbox";
 import { formatHumanDateTime } from "../../utils/date";
 
@@ -37,6 +40,7 @@ export function ObservationsList() {
   const [observationsRD] = useService(async () => {
     const response = await getFHIRResources<Observation>("Observation", {
       _subject: patientId,
+      _sort: "-_lastUpdated",
     });
     return response;
   }, [showModal]);
@@ -46,19 +50,24 @@ export function ObservationsList() {
   });
   return (
     <>
-      <Space size="middle" style={{ padding: 10 }}>
-        <Button onClick={() => setShowModal(true)} type="primary">
-          Add observation
-        </Button>
-        <Button onClick={() => navigate("main")}>Back</Button>
-      </Space>
-      <RenderRemoteData remoteData={patientObservationsMapRD} renderLoading={() => <Spin />}>
+      <AppHeader>
+        <Space size="middle">
+          <Button onClick={() => setShowModal(true)} type="primary">
+            Add observation
+          </Button>
+          <Button onClick={() => navigate("main")}>Back</Button>
+        </Space>
+      </AppHeader>
+      <RenderRemoteData
+        remoteData={patientObservationsMapRD}
+        renderLoading={() => <Spin />}
+      >
         {(data) => (
           <ObservationsComponent
             showModal={showModal}
             setShowModal={setShowModal}
             patient={data.patient}
-            observationArray={
+            observationsList={
               extractBundleResources(data.observations).Observation
             }
           />
@@ -72,40 +81,30 @@ interface ObservationsComponentProps {
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
   patient: Patient;
-  observationArray: Observation[];
+  observationsList: Observation[];
 }
 
 function ObservationsComponent({
   showModal,
   setShowModal,
   patient,
-  observationArray,
+  observationsList,
 }: ObservationsComponentProps) {
+  const { Text } = Typography;
   return (
-    <div>
+    <>
       <AddObservationModalComponent
         showModal={showModal}
         setShowModal={setShowModal}
         patient={patient}
       />
-      <PatientComponent patient={patient} />
-      {observationArray.map((observation) => (
-        <div>
-          <div>{observation.value?.Quantity?.value}</div>
-          <div>{observation.value?.Quantity?.unit}</div>
-          <div>{formatHumanDateTime(observation.effective?.dateTime || '')}</div>
-        </div>
-      ))}
-    </div>
+      <Space size="middle" style={{ paddingTop: 10, paddingInline: 10 }}>
+        <Text code>patient: {patient.name?.[0].family}</Text>
+        <Text code>code: Hemoglobin [Mass/volume] in Blood (LOINC#718-7)</Text>
+      </Space>
+      <ObservationsListTable observationsList={observationsList} />
+    </>
   );
-}
-
-interface PatientComponentProps {
-  patient: Patient;
-}
-
-function PatientComponent({ patient }: PatientComponentProps) {
-  return <div>Patient name: {patient.name?.[0].family}</div>;
 }
 
 interface AddObservationModalComponentProps {
@@ -192,5 +191,55 @@ function AddObservationModalComponent({
         </Form.Item>
       </Form>
     </Modal>
+  );
+}
+
+interface ObservationsListTableProps {
+  observationsList: Observation[];
+}
+
+export function ObservationsListTable({
+  observationsList,
+}: ObservationsListTableProps) {
+  const dataSource = observationsList.map((observation) => {
+    return {
+      key: observation.id,
+      observation: observation.value?.Quantity?.value,
+      unit: observation.value?.Quantity?.unit,
+      dateTime: formatHumanDateTime(observation.effective?.dateTime || ""),
+      lastUpdated: formatHumanDateTime(observation.meta?.lastUpdated || ""),
+    };
+  });
+
+  const columns = [
+    {
+      title: <b>Value</b>,
+      dataIndex: "observation",
+      key: "observation",
+    },
+    {
+      title: <b>Unit</b>,
+      dataIndex: "unit",
+      key: "unit",
+    },
+    {
+      title: <b>Date & Time</b>,
+      dataIndex: "dateTime",
+      key: "dateTime",
+    },
+    {
+      title: <b>Last updated</b>,
+      dataIndex: "lastUpdated",
+      key: "lastUpdated",
+    },
+  ];
+
+  return (
+    <Table
+      dataSource={dataSource}
+      columns={columns}
+      bordered
+      style={{ padding: 10 }}
+    />
   );
 }

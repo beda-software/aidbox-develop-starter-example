@@ -1,16 +1,16 @@
 import { Button, Space } from "antd";
 
 import s from "./AppHeader.module.scss";
+import { useAppHeader } from "./useAppHeader";
 interface AppHeaderProps {
-  onLogout: () => void;
+  children?: JSX.Element;
 }
 
-export function AppHeader({ onLogout }: AppHeaderProps) {
+export function AppHeader({ children }: AppHeaderProps) {
+  const { onLogout } = useAppHeader();
   return (
     <Space size="middle" className={s.container}>
-      <Button key="create-patient" onClick={console.log} type={"primary"}>
-        Create patient
-      </Button>
+      {children}
       <Button key="logout" onClick={onLogout}>
         Logout
       </Button>

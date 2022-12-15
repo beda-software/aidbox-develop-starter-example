@@ -1,6 +1,6 @@
 import { logout } from "../../services/auth";
 
-export function useMain() {
+export function useAppHeader() {
   const onLogout = () => {
     logout();
     window.location.reload();

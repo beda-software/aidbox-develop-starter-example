@@ -1,20 +1,21 @@
-import { Table, Typography } from "antd";
+import { Space, Table, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Patient } from "../../types/aidbox";
+import { formatHumanDateTime } from "../../utils/date";
 
-interface Props {
-  patientList: Patient[];
+interface PatientsListTableProps {
+  patientsList: Patient[];
 }
 
-export function PatientsListTable({ patientList }: Props) {
+export function PatientsListTable({ patientsList }: PatientsListTableProps) {
   const navigate = useNavigate();
 
   const goToPatientData = (patient: Patient) =>
     navigate(`/patients/${patient.id}`);
 
-  const { Text, Link } = Typography;
+  const { Link } = Typography;
 
-  const dataSource = patientList.map((patient: Patient) => {
+  const dataSource = patientsList.map((patient: Patient) => {
     return {
       key: patient.id,
       patient: (
@@ -22,7 +23,7 @@ export function PatientsListTable({ patientList }: Props) {
           {patient.name ? String(patient.name[0].family) : patient.id}
         </Link>
       ),
-      lastUpdated: <Text>{patient.meta?.lastUpdated}</Text>,
+      lastUpdated: formatHumanDateTime(patient.meta?.lastUpdated || ""),
     };
   });
 
@@ -39,5 +40,12 @@ export function PatientsListTable({ patientList }: Props) {
     },
   ];
 
-  return <Table dataSource={dataSource} columns={columns} bordered />;
+  return (
+    <Table
+      dataSource={dataSource}
+      columns={columns}
+      bordered
+      style={{ padding: 10 }}
+    />
+  );
 }
