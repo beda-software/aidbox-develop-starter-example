@@ -1,4 +1,4 @@
-import { Space, Table, Typography } from "antd";
+import { Table, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Patient } from "../../types/aidbox";
 import { formatHumanDateTime } from "../../utils/date";
