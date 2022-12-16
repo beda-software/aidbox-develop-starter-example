@@ -8,20 +8,20 @@ import { usePatientsList } from "./hooks";
 import s from "./PatientsList.module.scss";
 
 export function PatientsList() {
-  const { showModal, setShowModal, patientsRD } = usePatientsList();
+  const { showPatientModal, setShowPatientModal, patientsRD } = usePatientsList();
 
   return (
     <>
       <AppHeader>
         <Button
           key="create-patient"
-          onClick={() => setShowModal(true)}
+          onClick={() => setShowPatientModal(true)}
           type={"primary"}
         >
           Create patient
         </Button>
       </AppHeader>
-      <AddPatientModal showModal={showModal} setShowModal={setShowModal} />
+      <AddPatientModal showPatientModal={showPatientModal} setShowPatientModal={setShowPatientModal} />
       <RenderRemoteData remoteData={patientsRD} renderLoading={() => <Spin />}>
         {(data) => (
           <div className={s.table}>

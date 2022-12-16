@@ -5,15 +5,15 @@ import { ObservationsListTable } from "../ObservationsListTable";
 import s from "./ObservationsDetails.module.scss";
 
 interface ObservationsDetailsProps {
-  showModal: boolean;
-  setShowModal: (showModal: boolean) => void;
+  showObservationModal: boolean;
+  setShowObservationModal: (showObservationModal: boolean) => void;
   patient: Patient;
   observationsList: Observation[];
 }
 
 export function ObservationsDetails({
-  showModal,
-  setShowModal,
+  showObservationModal,
+  setShowObservationModal,
   patient,
   observationsList,
 }: ObservationsDetailsProps) {
@@ -22,8 +22,8 @@ export function ObservationsDetails({
   return (
     <>
       <AddObservationModal
-        showModal={showModal}
-        setShowModal={setShowModal}
+        showObservationModal={showObservationModal}
+        setShowObservationModal={setShowObservationModal}
         patient={patient}
       />
       <Space size="middle" className={s.space}>

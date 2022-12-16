@@ -4,14 +4,14 @@ import { Button, DatePicker, Form, InputNumber, message, Modal } from "antd";
 import { Observation, Patient } from "../../types/aidbox";
 
 interface AddObservationModalProps {
-  showModal: boolean;
-  setShowModal: (showModal: boolean) => void;
+  showObservationModal: boolean;
+  setShowObservationModal: (showObservationModal: boolean) => void;
   patient: Patient;
 }
 
 export function AddObservationModal({
-  showModal,
-  setShowModal,
+  showObservationModal,
+  setShowObservationModal,
   patient,
 }: AddObservationModalProps) {
   const onFinish = async (values: { dateTime: Date; value: number }) => {
@@ -49,14 +49,14 @@ export function AddObservationModal({
     if (isSuccess(response)) {
       message.success("Observation added");
     }
-    setShowModal(false);
+    setShowObservationModal(false);
   };
   
   return (
     <Modal
       title="Add observation"
-      open={showModal}
-      onCancel={() => setShowModal(false)}
+      open={showObservationModal}
+      onCancel={() => setShowObservationModal(false)}
       okButtonProps={{ style: { display: "none" } }}
       cancelButtonProps={{ style: { display: "none" } }}
     >

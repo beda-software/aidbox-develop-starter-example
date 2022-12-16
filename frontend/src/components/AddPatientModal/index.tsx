@@ -5,13 +5,13 @@ import { Patient } from "../../types/aidbox";
 import { formatHumanDate } from "../../utils/date";
 
 interface AddPatientModalProps {
-  showModal: boolean;
-  setShowModal: (showModal: boolean) => void;
+  showPatientModal: boolean;
+  setShowPatientModal: (showPatientModal: boolean) => void;
 }
 
 export function AddPatientModal({
-  showModal,
-  setShowModal,
+  showPatientModal,
+  setShowPatientModal,
 }: AddPatientModalProps) {
   const onFinish = async (values: {
     family: string;
@@ -36,14 +36,14 @@ export function AddPatientModal({
     if (isSuccess(response)) {
       message.success("Patient created");
     }
-    setShowModal(false);
+    setShowPatientModal(false);
   };
 
   return (
     <Modal
       title="Create patient"
-      open={showModal}
-      onCancel={() => setShowModal(false)}
+      open={showPatientModal}
+      onCancel={() => setShowPatientModal(false)}
       okButtonProps={{ style: { display: "none" } }}
       cancelButtonProps={{ style: { display: "none" } }}
     >

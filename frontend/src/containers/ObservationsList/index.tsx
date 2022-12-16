@@ -6,14 +6,14 @@ import { ObservationsDetails } from "../../components/ObservationsDetails";
 import { useObservationsList } from "./hooks";
 
 export function ObservationsList() {
-  const { navigate, showModal, setShowModal, patientObservationsMapRD } =
+  const { navigate, showObservationModal, setShowObservationModal, patientObservationsMapRD } =
     useObservationsList();
 
   return (
     <>
       <AppHeader>
         <Space size="middle">
-          <Button onClick={() => setShowModal(true)} type="primary">
+          <Button onClick={() => setShowObservationModal(true)} type="primary">
             Add observation
           </Button>
           <Button onClick={() => navigate("main")}>Back</Button>
@@ -25,8 +25,8 @@ export function ObservationsList() {
       >
         {(data) => (
           <ObservationsDetails
-            showModal={showModal}
-            setShowModal={setShowModal}
+            showObservationModal={showObservationModal}
+            setShowObservationModal={setShowObservationModal}
             patient={data.patient}
             observationsList={
               extractBundleResources(data.observations).Observation

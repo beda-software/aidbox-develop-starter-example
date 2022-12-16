@@ -4,14 +4,14 @@ import { useState } from "react";
 import { Patient } from "../../types/aidbox";
 
 export function usePatientsList() {
-  const [showModal, setShowModal] = useState(false);
+  const [showPatientModal, setShowPatientModal] = useState(false);
 
   const [patientsRD] = useService(async () => {
     const response = await getFHIRResources<Patient>("Patient", {
       _sort: "-_lastUpdated",
     });
     return response;
-  }, [showModal]);
+  }, [showPatientModal]);
 
-  return { showModal, setShowModal, patientsRD };
+  return { showPatientModal, setShowPatientModal, patientsRD };
 }

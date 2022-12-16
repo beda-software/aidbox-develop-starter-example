@@ -13,7 +13,7 @@ export function useObservationsList() {
 
   const { patientId } = useParams();
 
-  const [showModal, setShowModal] = useState(false);
+  const [showObservationModal, setShowObservationModal] = useState(false);
 
   const [patientRD] = useService(async () => {
     const response = await getFHIRResource<Patient>({
@@ -29,12 +29,12 @@ export function useObservationsList() {
       _sort: "-_lastUpdated",
     });
     return response;
-  }, [showModal]);
+  }, [showObservationModal]);
 
   const patientObservationsMapRD = sequenceMap({
     patient: patientRD,
     observations: observationsRD,
   });
 
-  return { navigate, showModal, setShowModal, patientObservationsMapRD };
+  return { navigate, showObservationModal, setShowObservationModal, patientObservationsMapRD };
 }
