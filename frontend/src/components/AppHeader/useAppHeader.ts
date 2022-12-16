@@ -1,12 +1,12 @@
-import { logout } from "../../services/auth";
+import { logout } from '../../services/auth';
 
 export function useAppHeader() {
-  const onLogout = () => {
-    logout();
-    window.location.reload();
-  };
+    const onLogout = () => {
+        logout();
+        window.location.reload();
+    };
 
-  return {
-    onLogout,
-  };
+    return {
+        onLogout,
+    };
 }

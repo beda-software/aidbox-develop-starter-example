@@ -1,17 +1,17 @@
-import { Typography } from "antd";
-import { Patient } from "../../types/aidbox";
+import { Typography } from 'antd';
+import { Patient } from '../../types/aidbox';
 
 interface PatientItemProps {
-  patient: Patient;
+    patient: Patient;
 }
 
 export function PatientItem({ patient }: PatientItemProps) {
-  const { Link } = Typography;
+    const { Link } = Typography;
 
-  return (
-    <>
-      <Link onClick={console.log}>{patient.name?.[0].family}</Link>
-      {patient.meta?.createdAt}
-    </>
-  );
+    return (
+        <>
+            <Link onClick={console.log}>{patient.name?.[0].family}</Link>
+            {patient.meta?.createdAt}
+        </>
+    );
 }
