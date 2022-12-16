@@ -24,30 +24,27 @@ export function ObservationsListTable({
       title: <b>Value</b>,
       dataIndex: "observation",
       key: "observation",
+      width: "25%",
     },
     {
       title: <b>Unit</b>,
       dataIndex: "unit",
       key: "unit",
+      width: "25%",
     },
     {
       title: <b>Date & Time</b>,
       dataIndex: "dateTime",
       key: "dateTime",
+      width: "25%",
     },
     {
       title: <b>Last updated</b>,
       dataIndex: "lastUpdated",
       key: "lastUpdated",
+      width: "25%",
     },
   ];
 
-  return (
-    <Table
-      dataSource={dataSource}
-      columns={columns}
-      bordered
-      style={{ padding: 10 }}
-    />
-  );
+  return <Table dataSource={dataSource} columns={columns} bordered />;
 }

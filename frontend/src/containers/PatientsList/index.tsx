@@ -5,6 +5,7 @@ import { AddPatientModal } from "../../components/AddPatientModal";
 import { AppHeader } from "../../components/AppHeader";
 import { PatientsListTable } from "../../components/PatientsListTable";
 import { usePatientsList } from "./hooks";
+import s from "./PatientsList.module.scss";
 
 export function PatientsList() {
   const { showModal, setShowModal, patientsRD } = usePatientsList();
@@ -23,9 +24,11 @@ export function PatientsList() {
       <AddPatientModal showModal={showModal} setShowModal={setShowModal} />
       <RenderRemoteData remoteData={patientsRD} renderLoading={() => <Spin />}>
         {(data) => (
-          <PatientsListTable
-            patientsList={extractBundleResources(data).Patient}
-          />
+          <div className={s.table}>
+            <PatientsListTable
+              patientsList={extractBundleResources(data).Patient}
+            />
+          </div>
         )}
       </RenderRemoteData>
     </>

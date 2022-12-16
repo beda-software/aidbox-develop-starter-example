@@ -1,6 +1,6 @@
 import { Button, Form, Input, Space, Typography } from "antd";
-
 import { useSignIn } from "./useSignIn";
+import s from "./SignIn.module.scss";
 
 export function SignIn() {
   const { onFinish, onFinishFailed } = useSignIn();
@@ -15,7 +15,7 @@ export function SignIn() {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
-        style={{ padding: 10 }}
+        className={s.form}
       >
         <Text>Username</Text>
         <Form.Item

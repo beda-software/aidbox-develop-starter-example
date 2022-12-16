@@ -32,20 +32,15 @@ export function PatientsListTable({ patientsList }: PatientsListTableProps) {
       title: <b>Patient</b>,
       dataIndex: "patient",
       key: "patient",
+      width: "50%",
     },
     {
       title: <b>Last updated</b>,
       dataIndex: "lastUpdated",
       key: "lastUpdated",
+      width: "50%",
     },
   ];
 
-  return (
-    <Table
-      dataSource={dataSource}
-      columns={columns}
-      bordered
-      style={{ padding: 10 }}
-    />
-  );
+  return <Table dataSource={dataSource} columns={columns} bordered />;
 }
