@@ -14,8 +14,6 @@ export function AddPatientModal({
   setShowModal,
 }: AddPatientModalProps) {
   const onFinish = async (values: {
-    firstName: string;
-    middleName: string;
     family: string;
     birthDate: string;
     gender: string;
