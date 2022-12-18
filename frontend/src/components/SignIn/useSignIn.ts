@@ -1,9 +1,7 @@
 import { isSuccess } from 'aidbox-react/lib/libs/remoteData';
 import { notification } from 'antd';
 
-import { getSessionid, setToken, signin, SigninBody } from '../../services/auth';
-
-const sessionId = getSessionid();
+import { setToken, signin, SigninBody } from '../../services/auth';
 
 export function useSignIn() {
     const onFinish = async (values: SigninBody) => {
@@ -11,7 +9,6 @@ export function useSignIn() {
         if (isSuccess(signinResponse)) {
             const { access_token } = signinResponse.data;
             setToken(access_token);
-            console.log('Successful login: ', sessionId);
             window.location.reload();
         } else {
             notification.error({

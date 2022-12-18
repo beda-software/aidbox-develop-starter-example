@@ -1,30 +1,7 @@
 import { service } from 'aidbox-react/lib/services/service';
 
-import config from './config';
 import { RemoteDataResult } from 'aidbox-react/lib/libs/remoteData';
 import { User } from '../types/aidbox';
-
-export interface OAuthState {
-    nextUrl?: string;
-}
-
-export function parseOAuthState(state?: string): OAuthState {
-    try {
-        return state ? JSON.parse(atob(state)) : {};
-    } catch {}
-
-    return {};
-}
-
-export function formatOAuthState(state: OAuthState) {
-    return btoa(JSON.stringify(state));
-}
-
-export function getAuthorizeUrl(state?: OAuthState) {
-    const stateStr = state ? `&state=${formatOAuthState(state)}` : '';
-
-    return `${config.baseURL}/auth/authorize?client_id=${config.clientId}&response_type=token${stateStr}`;
-}
 
 export function getToken() {
     return window.localStorage.getItem('token') || undefined;
@@ -50,10 +27,6 @@ export function getUserInfo() {
         method: 'GET',
         url: '/auth/userinfo',
     });
-}
-
-export function getSessionid() {
-    return sessionStorage.getItem('sessionId') || undefined;
 }
 
 export interface SigninBody {
