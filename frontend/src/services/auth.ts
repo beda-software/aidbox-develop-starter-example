@@ -16,6 +16,7 @@ export function removeToken() {
 }
 
 export function logout() {
+    removeToken();
     return service({
         method: 'DELETE',
         url: '/Session',
