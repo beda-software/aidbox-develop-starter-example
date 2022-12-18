@@ -1,5 +1,6 @@
 import { RenderRemoteData } from 'aidbox-react/lib/components/RenderRemoteData';
 import { Button, Space } from 'antd';
+import { AlertFailure } from '../../components/AlertFailure';
 import { AppHeader } from '../../components/AppHeader';
 import { Loader } from '../../components/Loader';
 import { ObservationsDetails } from '../../components/ObservationsDetails';
@@ -24,7 +25,11 @@ export function ObservationsList() {
                     <Button onClick={() => navigate('main')}>Back</Button>
                 </Space>
             </AppHeader>
-            <RenderRemoteData remoteData={patientObservationsMapRD} renderLoading={() => <Loader />}>
+            <RenderRemoteData
+                remoteData={patientObservationsMapRD}
+                renderFailure={(error) => <AlertFailure error={error} />}
+                renderLoading={() => <Loader />}
+            >
                 {(data) => (
                     <ObservationsDetails
                         showObservationModal={showObservationModal}

@@ -5,6 +5,7 @@ import { useApp } from './hooks';
 import { ObservationsList } from '../ObservationsList';
 import { PatientsList } from '../PatientsList';
 import { Loader } from '../../components/Loader';
+import { AlertFailure } from '../../components/AlertFailure';
 
 export function App() {
     const { userResponse } = useApp();
@@ -13,7 +14,7 @@ export function App() {
         <BrowserRouter>
             <RenderRemoteData
                 remoteData={userResponse}
-                renderFailure={(error) => <div>{JSON.stringify(error)}</div>} // TODO Show error message
+                renderFailure={(error) => <AlertFailure error={error} />}
                 renderLoading={() => <Loader />}
             >
                 {(user) => (
