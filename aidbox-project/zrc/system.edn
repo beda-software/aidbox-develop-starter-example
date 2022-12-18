@@ -10,4 +10,7 @@
  {:zen/tags  #{aidbox/service}
   :engine    aidbox/seed
   :resources [{:id "SPA" :secret "secret" :grant_types ["password"] :resourceType "Client"},
-              {:id "patient_example", :name [{:family "John"}] :resourceType "Patient"}]}}
+              {:id "patient_example", :name [{:family "John"}] :resourceType "Patient"}
+              {:resourceType "AccessPolicy"
+               :engine "json-schema"
+               :schema {:required ["user"]}}]}}
