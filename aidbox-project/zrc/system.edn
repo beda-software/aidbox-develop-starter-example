@@ -3,14 +3,24 @@
 
  box
  {:zen/tags #{aidbox/system}
-  :zen/desc "Import box for test"
+  :zen/desc "Import box"
   :services {:seed seed}}
 
  seed
  {:zen/tags  #{aidbox/service}
   :engine    aidbox/seed
-  :resources [{:id "SPA" :secret "secret" :grant_types ["password"] :resourceType "Client"},
-              {:id "patient_example", :name [{:family "John"}] :resourceType "Patient"}
+  :resources [{:resourceType "Client" :id "SPA" :secret "secret" :grant_types ["password"]},
+              {:resourceType "Patient" :id "patient_example", :name [{:family "John"}]},
+              {:resourceType "Observation"
+               :id "observation_example"
+               :code {:coding [{:code "718-7"
+                                :system "http://loinc.org"
+                                :display "Hemoglobin [Mass/volume] in Blood"}]}
+               :value {:Quantity {:unit "g/dL" :value 5}}
+               :status "final"
+               :subject {:id "patient_example" :display "John" :resourceType "Patient"}
+               :effective {:dateTime "2022-12-01T00:00:00.000Z"}},
               {:resourceType "AccessPolicy"
+               :id "user-access-policy"
                :engine "json-schema"
                :schema {:required ["user"]}}]}}
