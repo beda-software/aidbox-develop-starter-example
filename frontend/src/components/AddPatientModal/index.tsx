@@ -51,7 +51,7 @@ export function AddPatientModal({
                     required
                     name="family"
                     label="Name"
-                    rules={[{ message: 'Please enter a name' }]}
+                    rules={[{ required: true, message: 'Please enter a name' }]}
                 >
                     <Input />
                 </Form.Item>
