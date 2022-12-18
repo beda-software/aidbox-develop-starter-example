@@ -1,13 +1,15 @@
 import { RenderRemoteData } from 'aidbox-react/lib/components/RenderRemoteData';
-import { Button, Spin } from 'antd';
+import { Button } from 'antd';
 import { AddPatientModal } from '../../components/AddPatientModal';
 import { AppHeader } from '../../components/AppHeader';
+import { Loader } from '../../components/Loader';
 import { PatientsListTable } from '../../components/PatientsListTable';
 import { usePatientsList } from './hooks';
 import s from './PatientsList.module.scss';
 
 export function PatientsList() {
-    const { showPatientModal, setShowPatientModal, patientsRD, reloadPatientsList } = usePatientsList();
+    const { showPatientModal, setShowPatientModal, patientsRD, reloadPatientsList } =
+        usePatientsList();
 
     return (
         <>
@@ -25,7 +27,7 @@ export function PatientsList() {
                 setShowPatientModal={setShowPatientModal}
                 reloadPatientsList={reloadPatientsList}
             />
-            <RenderRemoteData remoteData={patientsRD} renderLoading={() => <Spin />}>
+            <RenderRemoteData remoteData={patientsRD} renderLoading={() => <Loader />}>
                 {(data) => (
                     <div className={s.table}>
                         <PatientsListTable patientsList={data} />
