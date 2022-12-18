@@ -1,6 +1,10 @@
 import { useService } from 'aidbox-react/lib/hooks/service';
-import { getFHIRResource, getFHIRResources } from 'aidbox-react/lib/services/fhir';
-import { sequenceMap } from 'aidbox-react/lib/services/service';
+import {
+    extractBundleResources,
+    getFHIRResource,
+    getFHIRResources,
+} from 'aidbox-react/lib/services/fhir';
+import { mapSuccess, sequenceMap } from 'aidbox-react/lib/services/service';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Observation, Patient } from '../../types/aidbox';
@@ -25,7 +29,9 @@ export function useObservationsList() {
             _subject: patientId,
             _sort: '-_lastUpdated',
         });
-        return response;
+        return mapSuccess(response, (bundle) => {
+            return extractBundleResources(bundle).Observation;
+        });
     }, [showObservationModal]);
 
     const patientObservationsMapRD = sequenceMap({

@@ -1,5 +1,4 @@
 import { RenderRemoteData } from 'aidbox-react/lib/components/RenderRemoteData';
-import { extractBundleResources } from 'aidbox-react/lib/services/fhir';
 import { Button, Space, Spin } from 'antd';
 import { AppHeader } from '../../components/AppHeader';
 import { ObservationsDetails } from '../../components/ObservationsDetails';
@@ -25,7 +24,7 @@ export function ObservationsList() {
                         showObservationModal={showObservationModal}
                         setShowObservationModal={setShowObservationModal}
                         patient={data.patient}
-                        observationsList={extractBundleResources(data.observations).Observation}
+                        observationsList={data.observations}
                     />
                 )}
             </RenderRemoteData>

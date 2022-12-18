@@ -1,5 +1,6 @@
 import { useService } from 'aidbox-react/lib/hooks/service';
-import { getFHIRResources } from 'aidbox-react/lib/services/fhir';
+import { extractBundleResources, getFHIRResources } from 'aidbox-react/lib/services/fhir';
+import { mapSuccess } from 'aidbox-react/lib/services/service';
 import { useState } from 'react';
 import { Patient } from '../../types/aidbox';
 
@@ -10,7 +11,9 @@ export function usePatientsList() {
         const response = await getFHIRResources<Patient>('Patient', {
             _sort: '-_lastUpdated',
         });
-        return response;
+        return mapSuccess(response, (bundle) => {
+            return extractBundleResources(bundle).Patient;
+        });
     }, [showPatientModal]);
 
     return { showPatientModal, setShowPatientModal, patientsRD };

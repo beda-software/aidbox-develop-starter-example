@@ -1,5 +1,4 @@
 import { RenderRemoteData } from 'aidbox-react/lib/components/RenderRemoteData';
-import { extractBundleResources } from 'aidbox-react/lib/services/fhir';
 import { Button, Spin } from 'antd';
 import { AddPatientModal } from '../../components/AddPatientModal';
 import { AppHeader } from '../../components/AppHeader';
@@ -28,7 +27,7 @@ export function PatientsList() {
             <RenderRemoteData remoteData={patientsRD} renderLoading={() => <Spin />}>
                 {(data) => (
                     <div className={s.table}>
-                        <PatientsListTable patientsList={extractBundleResources(data).Patient} />
+                        <PatientsListTable patientsList={data} />
                     </div>
                 )}
             </RenderRemoteData>
