@@ -9,6 +9,7 @@ interface ObservationsDetailsProps {
     setShowObservationModal: (showObservationModal: boolean) => void;
     patient: Patient;
     observationsList: Observation[];
+    reloadObservationsList: () => void;
 }
 
 export function ObservationsDetails({
@@ -16,6 +17,7 @@ export function ObservationsDetails({
     setShowObservationModal,
     patient,
     observationsList,
+    reloadObservationsList,
 }: ObservationsDetailsProps) {
     const { Text } = Typography;
 
@@ -25,6 +27,7 @@ export function ObservationsDetails({
                 showObservationModal={showObservationModal}
                 setShowObservationModal={setShowObservationModal}
                 patient={patient}
+                reloadObservationsList={reloadObservationsList}
             />
             <Space size="middle" className={s.space}>
                 <Text code>patient: {patient.name?.[0].family}</Text>

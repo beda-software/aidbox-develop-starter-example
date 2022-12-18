@@ -7,9 +7,14 @@ import { formatHumanDate } from '../../utils/date';
 interface AddPatientModalProps {
     showPatientModal: boolean;
     setShowPatientModal: (showPatientModal: boolean) => void;
+    reloadPatientsList: () => void;
 }
 
-export function AddPatientModal({ showPatientModal, setShowPatientModal }: AddPatientModalProps) {
+export function AddPatientModal({
+    showPatientModal,
+    setShowPatientModal,
+    reloadPatientsList,
+}: AddPatientModalProps) {
     const onFinish = async (values: { family: string; birthDate: string; gender: string }) => {
         const patient = {
             name: [
@@ -29,6 +34,7 @@ export function AddPatientModal({ showPatientModal, setShowPatientModal }: AddPa
         if (isSuccess(response)) {
             message.success('Patient created');
         }
+        reloadPatientsList();
         setShowPatientModal(false);
     };
 

@@ -5,8 +5,13 @@ import { ObservationsDetails } from '../../components/ObservationsDetails';
 import { useObservationsList } from './hooks';
 
 export function ObservationsList() {
-    const { navigate, showObservationModal, setShowObservationModal, patientObservationsMapRD } =
-        useObservationsList();
+    const {
+        navigate,
+        showObservationModal,
+        setShowObservationModal,
+        patientObservationsMapRD,
+        reloadObservationsList,
+    } = useObservationsList();
 
     return (
         <>
@@ -25,6 +30,7 @@ export function ObservationsList() {
                         setShowObservationModal={setShowObservationModal}
                         patient={data.patient}
                         observationsList={data.observations}
+                        reloadObservationsList={reloadObservationsList}
                     />
                 )}
             </RenderRemoteData>

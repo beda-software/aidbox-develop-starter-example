@@ -7,14 +7,18 @@ import { Patient } from '../../types/aidbox';
 export function usePatientsList() {
     const [showPatientModal, setShowPatientModal] = useState(false);
 
-    const [patientsRD] = useService(async () => {
+    const [patientsRD, manager] = useService(async () => {
         const response = await getFHIRResources<Patient>('Patient', {
             _sort: '-_lastUpdated',
         });
         return mapSuccess(response, (bundle) => {
             return extractBundleResources(bundle).Patient;
         });
-    }, [showPatientModal]);
+    }, []);
 
-    return { showPatientModal, setShowPatientModal, patientsRD };
+    const reloadPatientsList = () => {
+        manager.reload();
+    };
+
+    return { showPatientModal, setShowPatientModal, patientsRD, reloadPatientsList };
 }

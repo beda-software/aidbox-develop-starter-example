@@ -7,7 +7,7 @@ import { usePatientsList } from './hooks';
 import s from './PatientsList.module.scss';
 
 export function PatientsList() {
-    const { showPatientModal, setShowPatientModal, patientsRD } = usePatientsList();
+    const { showPatientModal, setShowPatientModal, patientsRD, reloadPatientsList } = usePatientsList();
 
     return (
         <>
@@ -23,6 +23,7 @@ export function PatientsList() {
             <AddPatientModal
                 showPatientModal={showPatientModal}
                 setShowPatientModal={setShowPatientModal}
+                reloadPatientsList={reloadPatientsList}
             />
             <RenderRemoteData remoteData={patientsRD} renderLoading={() => <Spin />}>
                 {(data) => (

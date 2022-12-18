@@ -24,7 +24,7 @@ export function useObservationsList() {
         return response;
     });
 
-    const [observationsRD] = useService(async () => {
+    const [observationsRD, manager] = useService(async () => {
         const response = await getFHIRResources<Observation>('Observation', {
             _subject: patientId,
             _sort: '-_lastUpdated',
@@ -32,12 +32,22 @@ export function useObservationsList() {
         return mapSuccess(response, (bundle) => {
             return extractBundleResources(bundle).Observation;
         });
-    }, [showObservationModal]);
+    }, []);
+
+    const reloadObservationsList = () => {
+        manager.reload();
+    };
 
     const patientObservationsMapRD = sequenceMap({
         patient: patientRD,
         observations: observationsRD,
     });
 
-    return { navigate, showObservationModal, setShowObservationModal, patientObservationsMapRD };
+    return {
+        navigate,
+        showObservationModal,
+        setShowObservationModal,
+        patientObservationsMapRD,
+        reloadObservationsList,
+    };
 }

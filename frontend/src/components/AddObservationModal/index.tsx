@@ -7,12 +7,14 @@ interface AddObservationModalProps {
     showObservationModal: boolean;
     setShowObservationModal: (showObservationModal: boolean) => void;
     patient: Patient;
+    reloadObservationsList: () => void;
 }
 
 export function AddObservationModal({
     showObservationModal,
     setShowObservationModal,
     patient,
+    reloadObservationsList,
 }: AddObservationModalProps) {
     const onFinish = async (values: { dateTime: Date; value: number }) => {
         const observation = {
@@ -49,6 +51,7 @@ export function AddObservationModal({
         if (isSuccess(response)) {
             message.success('Observation added');
         }
+        reloadObservationsList();
         setShowObservationModal(false);
     };
 
