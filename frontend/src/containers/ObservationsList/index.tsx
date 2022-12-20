@@ -22,7 +22,7 @@ export function ObservationsList() {
                     <Button onClick={() => setShowObservationModal(true)} type="primary">
                         Add observation
                     </Button>
-                    <Button onClick={() => navigate('main')}>Back</Button>
+                    <Button onClick={() => navigate('patients')}>Back</Button>
                 </Space>
             </AppHeader>
             <RenderRemoteData

@@ -21,9 +21,9 @@ export function App() {
                     <Routes>
                         {user ? (
                             <>
-                                <Route path="main" element={<PatientsList />} />
+                                <Route path="patients" element={<PatientsList />} />
                                 <Route path="patients/:patientId/" element={<ObservationsList />} />
-                                <Route path="*" element={<Navigate to="/main" />} />
+                                <Route path="*" element={<Navigate to="/patients" />} />
                             </>
                         ) : (
                             <>
