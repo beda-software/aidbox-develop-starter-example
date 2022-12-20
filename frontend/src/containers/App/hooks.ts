@@ -16,7 +16,6 @@ export function useApp() {
         } else {
             if (extractErrorCode(response.error) !== 'network_error') {
                 resetInstanceToken();
-
                 return success(null);
             }
         }
