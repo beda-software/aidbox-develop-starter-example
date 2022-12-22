@@ -18,7 +18,7 @@ git clone git@github.com:beda-software/aidbox-develop-starter-example.git
 cd aidbox-project
 ```
 
-3. Copy the file `.env.tpl` into the `aidbox-project` directory and replace `<your-license-key>` with the key that you can get on the [Aidbox portal](https://aidbox.app/).
+3. Copy the file `.env.tpl` into `.env` file in the same directory and replace `<your-license-key>` with the key that you can get on the [Aidbox portal](https://aidbox.app/).
 
 4. Start the Aidbox platform by running the following command:
 
